@@ -5,7 +5,7 @@ public class main {
         while (true) {
             System.out.println("========================================");
             System.out.println("|                                      |");
-            System.out.println("|                                      |");
+            System.out.println("|                               🍔    |");
             System.out.println("|                                      |");
             System.out.println("|                                      |");
             System.out.println("|                                      |");
