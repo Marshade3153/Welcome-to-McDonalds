@@ -1,33 +1,68 @@
-//hello how are you i am under the water
-import javax.swing.*;        
+import java.util.Scanner;
 
 public class main {
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("HelloWorldSwing");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public static Scanner sc = new Scanner(System.in);
+    // public static char[][] screen = {"========================================".toCharArray(),
+    //                                 "|                                      |".toCharArray(),
+    //                                 "|                                      |".toCharArray(),
+    //                                 "|                                      |".toCharArray(),
+    //                                 "|                                      |".toCharArray(),
+    //                                 "|    o                                 |".toCharArray(),
+    //                                 "|   <|\\                               |".toCharArray(),
+    //                                 "|   / >                                |".toCharArray(),
+    //                                 "========================================".toCharArray(),};
+    //
+    public static void clear() {
+        System.out.println();
+        System.out.println("Press Enter to continue.");
+        sc.nextLine();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+    public static void main(String[] args) {
+        // Initial object loading
+        System.out.println("Welcome! Enter your name: ");
+        String name = sc.nextLine();
+        Player player = new Player(name, 4, 100, 10);
+        System.out.println();
 
-        //Add the ubiquitous "Hello World" label.
-        JLabel label = new JLabel("Hello World");
-        frame.getContentPane().add(label);
+        System.out.println("What difficulty would you like to play on?");
+        System.out.println("1: Easy");
+        System.out.println("2: Medium");
+        System.out.println("3: Hard");
+        int difficulty = sc.nextInt();
 
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
+        while (difficulty < 1 || difficulty > 3){
+            System.out.print("Please input a valid difficulty: ");
+            difficulty = sc.nextInt();
+        }
+        System.out.println();
+        
+        switch (difficulty) {
+            case 1:{
+                System.out.println("Easy difficulty has been chosen.");
+                break;
+            }
+            case 2:{
+                System.out.println("Normal difficulty has been chosen.");
+                break;
+            }
+            case 3:{
+                System.out.println("Hard difficulty has been chosen.");
+                break;
+            }
+        }
+        
+        clear();
+        Fight fight = new Fight(difficulty);
+        
+        while (fight.moreBosses()) {
+            fight.fightNextBoss(player);
+            //shop.show();
+        }
     }
 
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+    public void updateScreen() {
+        ;
     }
 }
