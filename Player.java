@@ -44,50 +44,45 @@ public class Player extends Entity {
         }
     }
 
-    public void useItem(Entity e, ItemType item) {
+    public void useItem(Entity e, Item item) {
         checkCalories();
         int happyValue;
 
-        switch (item) {
+        switch (item.itemType) {
             case frenchFries:
-
                 if (this.defense < MAX_DEFENSE) {
                     this.defense += 2;
                 }
                 if (this.damage < MAX_DAMAGE) {
                     this.damage += 3;
                 }
-                this.calorieCount += 320;
                 break;
             case bigMac:
                 this.MAX_DEFENSE += 5;
                 this.MAX_DAMAGE += 3;
-                this.calorieCount += 600;
                 break;
             case vanillaCone:
                 this.health += (int) (Math.random() * 4) + 5;
-                this.calorieCount += 200;
                 break;
             case oreoMcFlurry:
                 this.health += (int) (Math.random() * 6) + 20;
                 if ((int)(Math.random() * 100) + 1 < 10){
                     super.giveStatus(StatusEffect.brainFreeze);
                 }
-                this.calorieCount += 650;
                 break;
             case largeSprite:
                 super.giveStatus(StatusEffect.none);
-                this.calorieCount += 380;
                 break;
             case pinkSlime:
                 e.giveStatus(StatusEffect.foodPoisoning);
                 break;
             case happyMeal:
-                happyValue = 
-                
-
-                
+                // TODO: apply random (status?) effect
+                happyValue = 0;
+                break;
         }
+
+        this.calorieCount += item.calories;
     }
 
     public void checkCalories(){

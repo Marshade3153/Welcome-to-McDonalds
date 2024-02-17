@@ -13,9 +13,11 @@ public class main {
     //                                 "========================================".toCharArray(),};
     //
     public static void clear() {
-        System.out.println();
         System.out.println("Press Enter to continue.");
-        sc.nextLine();
+        String s = sc.nextLine();
+        s = sc.nextLine(); // idk why we need to do it twice but we do
+
+        System.out.flush();
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
@@ -36,7 +38,6 @@ public class main {
             System.out.print("Please input a valid difficulty: ");
             difficulty = sc.nextInt();
         }
-        System.out.println();
         
         switch (difficulty) {
             case 1:{
@@ -52,8 +53,9 @@ public class main {
                 break;
             }
         }
-        
+
         clear();
+        
         Fight fight = new Fight(difficulty);
         
         while (fight.moreBosses()) {

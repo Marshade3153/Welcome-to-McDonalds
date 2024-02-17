@@ -54,6 +54,7 @@ public class Fight {
             }
         } 
         else {
+            System.out.println("What would you like to do?");
             int choice = main.sc.nextInt();
             while (choice > 4 || (p1.backpack.size() == 0)) {
                 choice = main.sc.nextInt();
@@ -84,7 +85,7 @@ public class Fight {
 
                 Item item = p1.backpack.get(itemChoice);
 
-                p1.useItem(boss, item.itemType);
+                p1.useItem(boss, item);
             } else {
                 System.out.println("Invalid input loser");
             }
