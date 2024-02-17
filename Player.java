@@ -16,8 +16,6 @@ public class Player extends Entity{
     }
 
     public void turn(){
-        double roll = Math.random() % 6 + 1;
-
-        
+        double roll = Math.random() % 6 + 1;   
     }
 }
