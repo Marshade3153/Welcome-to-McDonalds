@@ -4,18 +4,15 @@ Entity:
 - Defense (int)
 
 - Status Effects (multiple bools)
-    - Paralyze
+    - BrainFreeze(paralyze)
     - Confuse
-    - Burn
-    - 
-
+    - Poison
 
 Player (extends Entity):
-- 
 
 
 Boss (extends Entity) 
-- 
+
 
 
 Consumables:

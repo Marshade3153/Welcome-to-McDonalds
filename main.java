@@ -1,18 +1,27 @@
 import java.util.Scanner;
 
 public class main {
+    public static char[][] board = {"========================================".toCharArray(),
+                             "|                                      |".toCharArray(),
+                             "|                                      |".toCharArray(),
+                             "|                                      |".toCharArray(),
+                             "|                                      |".toCharArray(),
+                             "|    o                                  |".toCharArray(),
+                             "|   <|\\                                |".toCharArray(),
+                             "|   / >                                 |".toCharArray(),
+                             "========================================".toCharArray(),};
     public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+
         while (true) {
-            System.out.println("========================================");
-            System.out.println("|                                      |");
-            System.out.println("|                               🍔    |");
-            System.out.println("|                                      |");
-            System.out.println("|                                      |");
-            System.out.println("|                                      |");
-            System.out.println("|                                      |");
-            System.out.println("|                                      |");
-            System.out.println("========================================");
+            System.out.println(board);
+            s.;
         }
+
+    }
+
+    public void  {
+
     }
 
     public void clear() {

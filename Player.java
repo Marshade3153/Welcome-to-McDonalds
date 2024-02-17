@@ -1,5 +1,8 @@
 public class Player extends Entity{
     private String name;
+    private boolean heavy;
+    private boolean heal;
+    
 
     public Player() {
         super();
@@ -13,6 +16,8 @@ public class Player extends Entity{
     }
 
     public void turn(){
+        double roll = Math.random() % 6 + 1;
+
         
     }
 }

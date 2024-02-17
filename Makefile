@@ -4,3 +4,6 @@ all: main
 main:
 	javac main.java
 
+clean:
+	
+
