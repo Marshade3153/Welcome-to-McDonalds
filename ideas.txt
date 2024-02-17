@@ -1,0 +1,23 @@
+Entity:
+- Name (String)
+- HP (int)
+- Defense (int)
+
+- Status Effects (multiple bools)
+    - Paralyze
+    - Confuse
+    - Burn
+    - 
+
+
+Player (extends Entity):
+- 
+
+
+Boss (extends Entity) 
+- 
+
+
+Consumables:
+
+Pokemon:
