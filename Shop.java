@@ -5,7 +5,7 @@ public class Shop {
     }
 
     public void shop(Player player) {
-        String server = servers[(int) Math.random() * servers.length];
+        String server = servers[(int) (Math.random() * servers.length)];
         System.out.println("SHOP");
         System.out.println("Welcome to McDonald's. This is " + server + ", I'll be taking your order");
         System.out.println("You have " + player.wallet + " coins in your wallet");
@@ -15,7 +15,7 @@ public class Shop {
         for (i = 0; i < Item.allItems.length; ++i) {
             System.out.println("(" + (i + 1) + ") " + Item.allItems[i]);
         }
-        System.out.println("(" + i + ") Exit the shop");
+        System.out.println("(" + (i + 1) + ") Exit the shop");
 
         int choice = main.sc.nextInt() - 1;
         while (choice > 8 || choice < 0) {

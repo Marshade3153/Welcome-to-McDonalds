@@ -42,7 +42,7 @@ public class Entity {
         if (e.defense > 0) {
             e.defense -= 1;
             this.damage += 2;
-            String insult = insults[(int) Math.random() * insults.length];
+            String insult = insults[(int) (Math.random() * insults.length)];
             System.out.println("Your opponent called you " + insult + ". Defense decreased.");
         } else {
             // System.out.println("Enemy defense cannot be lowered further.");

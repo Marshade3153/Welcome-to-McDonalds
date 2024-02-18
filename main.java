@@ -62,6 +62,7 @@ public class main {
         while (fight.moreBosses()) {
             fight.fightNextBoss(player);
             shop.shop(player);
+            clear();
         }
     }
 }

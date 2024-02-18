@@ -10,6 +10,7 @@ public class Player extends Entity {
     public boolean foodComa; 
     public int wallet;
     public ArrayList<Item> backpack;
+    public int happyValue;
 
     public Player() {
         super();
@@ -45,13 +46,12 @@ public class Player extends Entity {
 
     public void printBackpack() {
         for (int i = 0; i < backpack.size(); ++i) {
-            System.out.println(i + ": " + backpack.get(i));
+            System.out.println((i + 1) + ": " + backpack.get(i));
         }
     }
 
     public void useItem(Entity e, Item item) {
         checkCalories();
-        int happyValue;
 
         switch (item.itemType) {
             case frenchFries:
@@ -84,32 +84,38 @@ public class Player extends Entity {
                 break;
             case happyMeal:
                 // TODO: apply random (status?) effect
-                happyValue = (int) Math.random() * 10000;
-                if (happyValue <= 1){
+                this.happyValue = (int) (Math.random() * 10000);
+                System.out.println(this.happyValue);
+                if (this.happyValue <= 1){
                     this.health = 999;
+                    break;
                 }
-                else if(happyValue > 1 && happyValue < 2000){
+                else if(this.happyValue > 1 && this.happyValue < 2000){
                     this.health += (int) (Math.random() * 16) + 2;
+                    break;
                 }
-                else if(happyValue >= 2000 && happyValue < 3000){
+                else if(this.happyValue >= 2000 && this.happyValue < 3000){
                     this.health -= (int) (Math.random() * 10) + 1;
+                    break;
                 }
-                else if(happyValue >= 3000 && happyValue < 4000){
+                else if(this.happyValue >= 3000 && this.happyValue < 4000){
                     giveStatus(StatusEffect.brainFreeze);
+                    break;
                 }
-                else if(happyValue >= 4000 && happyValue < 6000){
+                else if(this.happyValue >= 4000 && this.happyValue < 6000){
                     giveStatus(StatusEffect.foodPoisoning);
+                    break;
                 }
-                else if(happyValue >= 6000 && happyValue < 7000){
+                else if(this.happyValue >= 6000 && this.happyValue < 7000){
                     giveStatus(StatusEffect.highCholesterol);
+                    break;
                 }
                 else break;
 
-                break;
         }
 
         this.calorieCount += item.calories;
-        System.out.println("You have now consumed " + calorieCount + " calories.");
+        System.out.println("You have now consumed " + item.calories + " calories.");
     }
 
     public void checkCalories() {
@@ -125,25 +131,29 @@ public class Player extends Entity {
         return foodComa;
     }
 
-    @Override
+    /*@Override
     public void taunt(Entity e) {
         if (e.defense > 0) {
+            if (calorieCount > 0){
             this.calorieCount -= 100;
+            }
             e.defense -= 1;
             if (this.damage < MAX_DAMAGE) {
                 this.damage += 2;
             }
-            String insult = insults[(int) Math.random() * insults.length];
+            String insult = insults[(int) (Math.random() * insults.length)];
             System.out.println("You call your opponent " + insult + ". Enemy defense decreased.");
         } else {
             System.out.println("Enemy defense cannot be lowered further.");
         }
-    }
+    }*/
     
-    @Override
+    /*@Override
     public void defend(Entity e) {
         if (this.defense < MAX_DEFENSE) {
-            this.calorieCount -= 100; 
+            if (calorieCount > 0){
+                this.calorieCount -= 100;
+            }
             this.defense += 1;
             if (e.damage > 2) {
                 e.damage -= 2;
@@ -152,13 +162,15 @@ public class Player extends Entity {
         } else {
             System.out.println("Your defense cannot go higher.");
         }
-    }
+    }*/
 
     @Override
     public void attack(Entity e) {
-        int roll = (int) Math.random() * 6 + 1;
+        int roll = (int) (Math.random() * 6) + 1;
         double turnDmg = this.damage;
-        this.calorieCount -= 150;
+        if (calorieCount > 0){
+            this.calorieCount -= 100;
+        }
 
         switch (roll) {
             case 1:{

@@ -41,11 +41,12 @@ public class Fight {
         p1.checkStatusEffect();
         boss.checkStatusEffect();
         
+
         switch(p1.statusEffect){
             case brainFreeze:{
                 int chance = (int) Math.random() * 100;
                 if (chance < 10){
-                    return;
+                    turnCounter += 1;
                 }
                 break;
             }
@@ -87,7 +88,7 @@ public class Fight {
         
         if (turnCounter % 2 == 1){
             // boss's turn
-            int choice = (int) Math.random() * 100;
+            int choice = (int) (Math.random() * 100);
             int attackRange = bossIndex * 100 / bosses.length;
             
             if (numTaunts > 0) {
@@ -115,27 +116,52 @@ public class Fight {
                 System.out.println("\t(1) Attack\n\t(2) Defend\n\t(3) Taunt\n\t(4) Item");
                 choice = main.sc.nextInt();
             } 
-            main.clear();
+            
             //Attack
             if (choice == 1) {
                 p1.attack(boss);
             } 
             //Defend
             else if (choice == 2) {
-                p1.defend(boss);
+                if (p1.defense < p1.MAX_DEFENSE) {
+                    if (p1.calorieCount > 0){
+                        p1.calorieCount -= 100;
+                    }
+                    p1.defense += 1;
+                    if (boss.damage > 2) {
+                        boss.damage -= 2;
+                    }
+                    System.out.println("You tape rolls of toilet paper to yourself. Defense increased.");
+                } else {
+                    System.out.println("Your defense cannot go higher.");
+                }
             }
             //Taunt
             else if (choice == 3) {
-                p1.taunt(boss);
+                if (boss.defense > 0) {
+                    if (p1.calorieCount > 0){
+                    p1.calorieCount -= 100;
+                    }
+                    boss.defense -= 1;
+                    if (p1.damage < p1.MAX_DAMAGE) {
+                        p1.damage += 2;
+                    }
+                    String insult = boss.insults[(int) (Math.random() * boss.insults.length)];
+                    System.out.println("You call your opponent " + insult + ". Enemy defense decreased.");
+                } else {
+                    System.out.println("Enemy defense cannot be lowered further.");
+                }
             }
             //Item
             else if (choice == 4 && p1.backpack.size() > 0) {
                 System.out.println("What item would you like to use?");
                 p1.printBackpack();
                 int itemChoice = main.sc.nextInt();
+                itemChoice -= 1;
                 while (itemChoice > p1.backpack.size()) {
                     System.out.println("Input a valid item # (0 - " + (p1.backpack.size() - 1) + ")");
                     itemChoice = main.sc.nextInt();
+                    itemChoice -= 1;
                 }
 
                 Item item = p1.backpack.get(itemChoice);
@@ -174,7 +200,7 @@ public class Fight {
             turnCounter++;
         } while (boss.health > 0);
 
-        player.wallet += ((int) Math.random() * 10 - 5) + bosses[bossIndex].health / 2;
+        player.wallet += ((int) (Math.random() * 10) - 5) + bosses[bossIndex].health / 2;
         bossIndex++;
     }
 
