@@ -110,7 +110,9 @@ public class Fight {
             
             // player's turn
             int choice = main.sc.nextInt();
-            while (choice > 5 || (p1.backpack.size() == 0)) {
+            while (choice > 5 || (choice == 4 && p1.backpack.size() == 0)) {
+                System.out.println("What would you like to do?");
+                System.out.println("\t(1) Attack\n\t(2) Defend\n\t(3) Taunt\n\t(4) Item");
                 choice = main.sc.nextInt();
             } 
             main.clear();
@@ -135,7 +137,6 @@ public class Fight {
                     System.out.println("Input a valid item # (0 - " + (p1.backpack.size() - 1) + ")");
                     itemChoice = main.sc.nextInt();
                 }
-                main.clear();
 
                 Item item = p1.backpack.get(itemChoice);
                 if (p1.getFoodComa() == false) {
@@ -151,9 +152,7 @@ public class Fight {
             } 
             else {
                 System.out.println("Invalid input loser");
-                main.clear();
             }
-            
         }
     }
 
@@ -166,13 +165,14 @@ public class Fight {
         do {
             if (player.health > 0) {
                 takeTurn(player, boss, turnCounter, numTaunts);
+                main.clear();
             } else {
                 //player.gameOver();
+                main.clear();
                 return;
             }
-            
             turnCounter++;
-        } while (boss.health < 0);
+        } while (boss.health > 0);
 
         player.wallet += ((int) Math.random() * 10 - 5) + bosses[bossIndex].health / 2;
         bossIndex++;

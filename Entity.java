@@ -47,7 +47,6 @@ public class Entity {
         } else {
             // System.out.println("Enemy defense cannot be lowered further.");
         }
-        main.clear();
     }
 
     public void defend(Entity e) {
@@ -58,7 +57,6 @@ public class Entity {
         } else {
             // System.out.println("Your defense cannot go higher.");
         }
-        main.clear();
     }
 
     public void attack(Entity e) {
@@ -94,6 +92,5 @@ public class Entity {
         }
         System.out.println("Enemy deals " + turnDmg + " damage.");
         this.health -= turnDmg;
-        main.clear();
     }
 }

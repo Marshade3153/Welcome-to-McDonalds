@@ -152,7 +152,6 @@ public class Player extends Entity {
         } else {
             System.out.println("Your defense cannot go higher.");
         }
-        main.clear();
     }
 
     @Override
