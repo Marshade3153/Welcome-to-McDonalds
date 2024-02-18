@@ -5,5 +5,6 @@ main:
 	javac main.java
 
 clean:
+	-rm *.class
 	
 

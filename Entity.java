@@ -1,64 +1,96 @@
 public class Entity {
-
-    private int defense = 4;
-    private double health;
-    private double damage;
-    private String statusEffect;
+    public final String[] insults = {"stupid", "ugly", "annoying", "short", "a cs major", "mid", "fat", "maidenless", "broke", "stinky"};
+    public String name;
+    public int defense;
+    public double health;
+    public double damage;
+    public StatusEffect statusEffect;
+    public int statusTurns;
 
     public Entity() {
+        this.name = "";
+        this.defense = 4;
+        this.health = 100.0f;
+        this.damage = 15.00f;
+        this.statusEffect = StatusEffect.none;
+        this.statusTurns = 0;
+    }
+
+    public Entity(String name, int defense, double health, double damage) {
+        this.name = name;
         this.defense = defense;
         this.health = health;
         this.damage = damage;
+        this.statusEffect = StatusEffect.none;
+        this.statusTurns = 0;
     }
 
-    public void giveStatus(int n){
-        switch (n) {
-            //Paralysis
-            case 1: {
-                statusEffect = "Brain Freeze";
-                break;
-            }
-            //Confuse
-            case 2: {
-                statusEffect = "High Choleesterol";
-                break;
-            }
-            //Poison
-            case 3: {
-                statusEffect = "Food Poisoning";
-                break;
-            }
+    public void giveStatus(StatusEffect s){
+        this.statusEffect = s;
+        this.statusTurns = 5;
+    }
+    
+    public void checkStatusEffect() {
+        if(this.statusTurns > 0) {
+            this.statusTurns--;
+        } else {
+            this.statusEffect = StatusEffect.none;
         }
     }
 
-    public String getStatus() {
-        return statusEffect;
+    public void taunt(Entity e) {
+        if (e.defense > 0) {
+            e.defense -= 1;
+            this.damage += 2;
+            String insult = insults[(int) Math.random() * insults.length];
+            System.out.println("Your opponent called you " + insult + ". Defense decreased.");
+        } else {
+            // System.out.println("Enemy defense cannot be lowered further.");
+        }
     }
 
-    
-
-
-    public int getDef() {
-        return defense;
+    public void defend(Entity e) {
+        if (this.defense < 8) {
+            this.defense += 1;
+            e.damage -= 2;
+            System.out.println("Your opponent tapes a layer of pillows to himself. Enemy defense increased.");
+        } else {
+            // System.out.println("Your defense cannot go higher.");
+        }
     }
 
-    public double getHealth() {
-        return health;
-    }
-
-    public double getAtk() {
-        return damage;
-    }
-
-    public void setAtk(double inc) {
-        damage = inc;
-    }
-
-    public void setName(String s) {
-        defense = s;
-    }
-
-    public void setHealth(double inc) {
-        health = inc;
+    public void attack(Entity e) {
+        int roll = (int) Math.random() * 6 + 1;
+        double turnDmg = this.damage;       
+        switch (roll) {
+            case 1:{
+                System.out.println("Your opponent throw a jab, slightly grazing your opponent.");
+                turnDmg -= 2;
+                break;
+            }
+            case 2:{
+                System.out.println("Your opponent slaps you across the face three times.");
+                turnDmg -= 1;
+                break;
+            }
+            case 3:
+            case 4:{
+                System.out.println("Your opponent gives you a swirlie.");
+                //turnDmg = this.damage;
+                break;
+            }
+            case 5:{
+                System.out.println("Your opponent sweeps you off your feet.");
+                turnDmg += 1;
+                break;
+            }
+            case 6:{
+                System.out.println("Your opponent belly flops on your legs, incapacitating you.");
+                turnDmg += 2;
+                break;
+            }
+        }
+        System.out.println("Enemy deals " + turnDmg + " damage.");
+        this.health -= turnDmg;
     }
 }
