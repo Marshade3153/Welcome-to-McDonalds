@@ -1,6 +1,6 @@
 public enum StatusEffect {
     none,
-    brainFreeze,
-    highCholesterol,
-    foodPoisoning
+    brainFreeze, // paralyze
+    highCholesterol, // confuse 
+    foodPoisoning // poison
 }

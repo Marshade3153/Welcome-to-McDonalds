@@ -22,6 +22,6 @@ public class Item {
     }
 
     public String toString() {
-        return this.itemType.toString() + "\n" + this.description;
+        return this.itemType.toString() + "\n" + this.description + " " + this.calories + " calories. " + this.cost + " coins.";
     }
 }

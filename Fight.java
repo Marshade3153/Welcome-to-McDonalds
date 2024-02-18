@@ -1,6 +1,6 @@
 public class Fight {
     private Entity[] bosses = {new Entity("Grimace Shake", 4, 50, 2), new Entity("Uncle o' Grimace", 4, 100, 8),
-            new Entity("Ice Cream Machine", 4, 125, 9), new Entity("Hamburgler", 4, 150, 10), new Entity("Officer Big Mac", 4, 200, 12),
+            new Entity("Ice Cream Machine", 4, 130, 9), new Entity("Hamburgler", 4, 150, 10), new Entity("Officer Big Mac", 4, 200, 12),
             new Entity("Mayor McCheese", 4, 250, 12), new Entity("Ronald McDonald", 4, 500, 25)};
 
     private static int bossIndex;
@@ -38,6 +38,53 @@ public class Fight {
     }
     
     private void takeTurn(Player p1, Entity boss, int turnCounter, int numTaunts) {
+        p1.checkStatusEffect();
+        boss.checkStatusEffect();
+        
+        switch(p1.statusEffect){
+            case brainFreeze:{
+                int chance = (int) Math.random() * 100;
+                if (chance < 10){
+                    return;
+                }
+                break;
+            }
+            case foodPoisoning:{
+                if(p1.health > 2)
+                    p1.health -= 2;
+                break;
+            }
+            case none:{
+                break;
+            }
+            default: {
+                System.out.println("Fatal Error. Exiting...");
+                return;
+            }
+        }
+
+        switch(boss.statusEffect){
+            case brainFreeze:{
+                int chance = (int) Math.random() * 100;
+                if (chance < 10){
+                    return;
+                }
+                break;
+            }
+            case foodPoisoning:{
+                if(boss.health > 20)
+                    boss.health -= 5;
+                break;
+            }
+            case none:{
+                break;
+            }
+            default: {
+                System.out.println("Fatal Error. Exiting...");
+                return;
+            }
+        }
+        
         if (turnCounter % 2 == 1){
             // boss's turn
             int choice = (int) Math.random() * 100;
@@ -91,8 +138,12 @@ public class Fight {
                 main.clear();
 
                 Item item = p1.backpack.get(itemChoice);
-
-                p1.useItem(boss, item);
+                if (p1.getFoodComa() == false) {
+                    p1.useItem(boss, item);
+                }
+                else {
+                    System.out.println("Too fat");
+                }
             }
             else if (choice == 5){
                 System.out.println("Thank you for playing!");
@@ -123,7 +174,7 @@ public class Fight {
             turnCounter++;
         } while (boss.health < 0);
 
-        player.wallet += bosses[bossIndex].health / 2;
+        player.wallet += ((int) Math.random() * 10 - 5) + bosses[bossIndex].health / 2;
         bossIndex++;
     }
 

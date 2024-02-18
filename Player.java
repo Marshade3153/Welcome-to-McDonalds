@@ -16,7 +16,6 @@ public class Player extends Entity {
         this.calorieCount = 0;
         this.backpack = new ArrayList<Item>();
         this.wallet = 40;
-        this.name = "";
         this.foodComa = false;
         this.MAX_DAMAGE = 0;
         this.MAX_DEFENSE = 8;
@@ -24,6 +23,12 @@ public class Player extends Entity {
 
     public Player(String name, int defense, double health, double damage) {
         super(name, defense, health, damage);
+        this.calorieCount = 0;
+        this.backpack = new ArrayList<Item>();
+        this.wallet = 40;
+        this.foodComa = false;
+        this.MAX_DAMAGE = 0;
+        this.MAX_DEFENSE = 8;
         System.out.println("Hello, " + name + "!");
     }
 
@@ -107,13 +112,17 @@ public class Player extends Entity {
         System.out.println("You have now consumed " + calorieCount + " calories.");
     }
 
-    public void checkCalories(){
-        if (calorieCount >= 2000){
+    public void checkCalories() {
+        if (calorieCount >= 2000) {
             foodComa = true;
         }
         else if (foodComa == true && calorieCount <= 1000) {
-            foodComa = false;
+        foodComa = false;
         }
+    }
+
+    public boolean getFoodComa(){
+        return foodComa;
     }
 
     @Override
@@ -148,7 +157,7 @@ public class Player extends Entity {
 
     @Override
     public void attack(Entity e) {
-        int roll = (int)  .random() * 6 + 1;
+        int roll = (int) Math.random() * 6 + 1;
         double turnDmg = this.damage;
         this.calorieCount -= 150;
 

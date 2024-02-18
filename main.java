@@ -63,8 +63,4 @@ public class main {
             //shop.show();
         }
     }
-
-    public void updateScreen() {
-        ;
-    }
 }

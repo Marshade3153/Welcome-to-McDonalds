@@ -5,6 +5,7 @@ public class Entity {
     public double health;
     public double damage;
     public StatusEffect statusEffect;
+    public int statusTurns;
 
     public Entity() {
         this.name = "";
@@ -12,6 +13,7 @@ public class Entity {
         this.health = 100.0f;
         this.damage = 15.00f;
         this.statusEffect = StatusEffect.none;
+        this.statusTurns = 0;
     }
 
     public Entity(String name, int defense, double health, double damage) {
@@ -20,12 +22,22 @@ public class Entity {
         this.health = health;
         this.damage = damage;
         this.statusEffect = StatusEffect.none;
+        this.statusTurns = 0;
     }
 
     public void giveStatus(StatusEffect s){
         this.statusEffect = s;
+        this.statusTurns = 5;
     }
     
+    public void checkStatusEffect() {
+        if(this.statusTurns > 0) {
+            this.statusTurns--;
+        } else {
+            this.statusEffect = StatusEffect.none;
+        }
+    }
+
     public void taunt(Entity e) {
         if (e.defense > 0) {
             e.defense -= 1;
@@ -33,18 +45,18 @@ public class Entity {
             String insult = insults[(int) Math.random() * insults.length];
             System.out.println("Your opponent called you " + insult + ". Defense decreased.");
         } else {
-            //System.out.println("Enemy defense cannot be lowered further.");
+            // System.out.println("Enemy defense cannot be lowered further.");
         }
         main.clear();
     }
-    
+
     public void defend(Entity e) {
         if (this.defense < 8) {
             this.defense += 1;
             e.damage -= 2;
             System.out.println("Your opponent tapes a layer of pillows to himself. Enemy defense increased.");
         } else {
-            //System.out.println("Your defense cannot go higher.");
+            // System.out.println("Your defense cannot go higher.");
         }
         main.clear();
     }
