@@ -45,7 +45,7 @@ public class Player extends Entity {
 
     public void printBackpack() {
         for (int i = 0; i < backpack.size(); ++i) {
-            System.out.print(i + ": " + backpack.get(i));
+            System.out.println(i + ": " + backpack.get(i));
         }
     }
 

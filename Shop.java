@@ -17,7 +17,7 @@ public class Shop {
         }
         System.out.println("(" + i + ") Exit the shop");
 
-        int choice = main.sc.nextInt();
+        int choice = main.sc.nextInt() - 1;
         while (choice > 8 || choice < 0) {
             System.out.println("Please input a valid number");
             choice = main.sc.nextInt();

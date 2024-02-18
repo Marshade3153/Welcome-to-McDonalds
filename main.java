@@ -26,6 +26,7 @@ public class main {
         System.out.println("Welcome! Enter your name: ");
         String name = sc.nextLine();
         Player player = new Player(name, 4, 100, 10);
+        Shop shop = new Shop();
         System.out.println();
 
         System.out.println("What difficulty would you like to play on?");
@@ -60,7 +61,7 @@ public class main {
         
         while (fight.moreBosses()) {
             fight.fightNextBoss(player);
-            //shop.show();
+            shop.shop(player);
         }
     }
 }
